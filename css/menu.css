@@ -1,0 +1,157 @@
+:root {
+  --primary-colour: rgba(13, 110, 139, .75);
+  --secondary-colour: rgba(229, 148, 130, .9);
+  --overlay-colour: rgba(24, 39, 51, .85);
+  --menu-speed: 0.75s;
+}
+
+.menu-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* CHECKBOX */
+.menu-wrap .toggler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+
+/* HAMBURGER OVERLAY */
+.menu-wrap .hamburger {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  background: var(--primary-colour);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HAMBURGER LINES */
+.menu-wrap .hamburger > div {
+  position: relative;
+  flex: none;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .4s ease;
+}
+
+/* HAMBURGER LINES (TOP AND BOTTOM) */
+.menu-wrap .hamburger > div:before,
+.menu-wrap .hamburger > div:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+
+.menu-wrap .hamburger > div:after {
+  top: 10px;
+}
+
+/* HAMBURGER ANIMATION */
+.menu-wrap .toggler:checked + .hamburger > div {
+  transform: rotate(135deg);
+}
+
+/* LINES TO CROSS ANIMATION */
+.menu-wrap .toggler:checked + .hamburger > div:before,
+.menu-wrap .toggler:checked + .hamburger > div:after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+/* ROTATE ON HOVER (WHEN CLICKED) */
+.menu-wrap .toggler:checked:hover + .hamburger > div {
+  transform: rotate(225deg);
+}
+
+/* SHOW MENU ON CLICK */
+.menu-wrap .toggler:checked ~ .menu {
+  visibility: visible;
+}
+
+.menu-wrap .toggler:checked ~ .menu > div {
+  transform: scale(1.2);
+  transition-duration: var(--menu-speed);
+}
+
+.menu-wrap .toggler:checked ~ .menu > div > div {
+  opacity: 1;
+  transition: opacity .4s ease .4s;
+}
+
+/* MENU CONTENT */
+.menu-wrap .menu {
+  position: fixed;
+  top: 0;
+  width: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MENU CONTENT ANIMATION */
+.menu-wrap .menu > div {
+  background: var(--overlay-colour);
+  border-radius: 50%;
+  width: 200vw;
+  height: 200vw;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+  transition: all .4s ease;
+}
+
+/* MENU TEXT ANIMATION */
+.menu-wrap .menu > div > div {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+/* MENU TEXT STYLE */
+.menu-wrap .menu > div > div > ul > li {
+  list-style: none;
+  color: #fff;
+  font-size: 1.6rem;
+  padding: 1.1rem;
+}
+
+.menu-wrap .menu > div > div > ul > li > a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+/* MENU TEXT ON HOVER */
+.menu-wrap .menu > div > div > ul > li > a:hover {
+  color: var(--secondary-colour);
+}
